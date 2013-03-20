@@ -10,10 +10,16 @@ ADMINS = (
 MANAGERS = ADMINS
 
 import os
-if not os.environ.get('RUNNING_LOCALLY',False):
+if os.environ.get('RUNNING_ON_HEROKU'): 
     # foreman includes variables in .env
     # 'if not...' so that you can run commands locally without foreman
-    DATABASES = {
+    import dj_database_url
+    DATABASES = {}
+    DATABASES['default'] =  dj_database_url.config()
+
+else: # then assume running locally
+    # Parse database configuration from $DATABASE_URL
+        DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
             'NAME': 'soccerdb',                      # Or path to database file if using sqlite3.
@@ -24,12 +30,6 @@ if not os.environ.get('RUNNING_LOCALLY',False):
             'PORT': '',                      # Set to empty string for default.
         }
     }
-else:
-    # Parse database configuration from $DATABASE_URL
-    import dj_database_url
-    DATABASES = {}
-    DATABASES['default'] =  dj_database_url.config()
-
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
