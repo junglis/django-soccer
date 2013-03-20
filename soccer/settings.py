@@ -1,5 +1,7 @@
 # Django settings for soccer project.
 
+from registration_defaults.settings import * #per django-registration
+
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
