@@ -1,7 +1,5 @@
 # Django settings for soccer project.
 
-from registration_defaults.settings import * #per django-registration
-
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
@@ -33,6 +31,10 @@ else: # then assume running locally
         }
     }
 
+from registration_defaults.settings import * #per django-registration
+
+settingsDirectory = os.path.dirname(__file__)
+TEMPLATE_DIR = os.path.join(settingsDirectory,"templates")
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = []
@@ -120,7 +122,8 @@ ROOT_URLCONF = 'soccer.urls'
 WSGI_APPLICATION = 'soccer.wsgi.application'
 
 TEMPLATE_DIRS = (
-    '/Users/matt/Dropbox/code/soccer/soccer/templates'
+    #'/Users/matt/Dropbox/code/soccer/soccer/templates'
+    TEMPLATE_DIR
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
