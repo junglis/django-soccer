@@ -133,7 +133,7 @@ INSTALLED_APPS = ( #order is signficant
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'registration_defaults', #before 'django.contrib.admin' to ensure consistent base tempaltes used
+    #'registration_defaults', #before 'django.contrib.admin' to ensure consistent base tempaltes used
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
