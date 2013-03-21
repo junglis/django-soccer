@@ -3,5 +3,6 @@ distribute==0.6.28
 dj-database-url==0.2.1
 psycopg2==2.4.6
 wsgiref==0.1.2
-git+git://github.com/mwieler/django-registration-1.5.git
+-e hg+https://bitbucket.org/ubernostrum/django-registration#egg=django-registration
 git+git://github.com/yourcelf/django-registration-defaults.git
+djrill=0.4.0
