@@ -143,7 +143,8 @@ INSTALLED_APPS = ( #order is signficant
     # 'django.contrib.admindocs',
     # for django-registration
     'django.contrib.humanize', # per django-registration
-    'registration' #django-registration
+    'registration', #django-registration
+    'djrill',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -181,7 +182,12 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # per django-registration
 ACCOUNT_ACTIVATION_DAYS=7
-EMAIL_HOST='localhost'
-EMAIL_PORT=1023
-EMAIL_HOST_USER='username'
-EMAIL_HOST_PASSWORD='password'
+#EMAIL_HOST='localhost'
+#EMAIL_PORT=1023
+#EMAIL_HOST_USER='username'
+#EMAIL_HOST_PASSWORD='password'
+
+#per djrill
+MANDRILL_API_KEY = os.getenv("MANDRILL_API_KEY") # mandrill
+DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL") # added after looking at source code
+EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend" # mandrill
