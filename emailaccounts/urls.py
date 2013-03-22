@@ -25,7 +25,6 @@ from django.views.generic.base import TemplateView
 
 # from registration.backends.default.views import ActivationView
 # from registration.backends.default.views import RegistrationView
-
 from emailaccounts.views import ActivationView
 from emailaccounts.views import RegistrationView
 

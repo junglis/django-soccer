@@ -6,10 +6,12 @@ from django.contrib.sites.models import RequestSite
 from django.contrib.sites.models import Site
 
 from registration import signals
-from registration.models import RegistrationProfile
-from registration.views import ActivationView as BaseActivationView
-from registration.views import RegistrationView as BaseRegistrationView
+#from registration.models import RegistrationProfile
+from emailaccounts.registration_models import RegistrationProfile
 
+from registration.views import ActivationView as BaseActivationView
+#from registration.views import RegistrationView as BaseRegistrationView
+from emailaccounts.registration_views import RegistrationView as BaseRegistrationView
 
 class RegistrationView(BaseRegistrationView):
     """
