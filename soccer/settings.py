@@ -31,7 +31,7 @@ else: # then assume running locally
         }
     }
 
-from registration_defaults.settings import * #per django-registration
+#from registration_defaults.settings import * #per django-registration
 
 settingsDirectory = os.path.dirname(__file__)
 TEMPLATE_DIR = os.path.join(settingsDirectory,"templates")
@@ -136,7 +136,7 @@ INSTALLED_APPS = ( #order is signficant
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    #'registration_defaults', #before 'django.contrib.admin' to ensure consistent base tempaltes used
+    #'registration_defaults', #before 'django.contrib.admin' to ensure consistent base templates used
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
@@ -145,6 +145,7 @@ INSTALLED_APPS = ( #order is signficant
     'django.contrib.humanize', # per django-registration
     'registration', #django-registration
     'djrill',
+    #'emailaccounts', # this is a user-defined app that defines email accounts
 )
 
 # A sample logging configuration. The only tangible logging
@@ -182,12 +183,14 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # per django-registration
 ACCOUNT_ACTIVATION_DAYS=7
-EMAIL_HOST='localhost'
-EMAIL_PORT=1023
-EMAIL_HOST_USER='username'
-EMAIL_HOST_PASSWORD='password'
+#EMAIL_HOST='localhost'
+#EMAIL_PORT=1023
+#EMAIL_HOST_USER='username'
+#EMAIL_HOST_PASSWORD='password'
 
 #per djrill
 MANDRILL_API_KEY = os.getenv("MANDRILL_API_KEY") # mandrill
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL") # added after looking at source code
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend" # mandrill
+
+#AUTH_USER_MODEL = 'emailaccounts.MyUser'
