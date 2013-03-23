@@ -31,7 +31,7 @@ else: # then assume running locally
         }
     }
 
-from registration_defaults.settings import * #per django-registration
+# from registration_defaults.settings import * #per django-registration
 
 settingsDirectory = os.path.dirname(__file__)
 TEMPLATE_DIR = os.path.join(settingsDirectory,"templates")
