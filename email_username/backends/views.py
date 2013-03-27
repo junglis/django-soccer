@@ -4,14 +4,19 @@ from django.contrib.sites.models import Site
 
 from registration import signals
 #from registration.models import RegistrationProfile
-from email_username.registration_models import RegistrationProfile
+from email_username.models import RegistrationProfile
 
-# from registration.views import ActivationView as BaseActivationView
-# from registration.views import RegistrationView as BaseRegistrationView
-from email_username.registration_views import ActivationView as BaseActivationView
-from email_username.registration_views import RegistrationView as BaseRegistrationView
+from registration.views import ActivationView as BaseActivationView
+from registration.views import RegistrationView as BaseRegistrationView
+#from email_username.registration_views import ActivationView as BaseActivationView
+#from email_username.registration_views import RegistrationView as BaseRegistrationView
+
+from email_username.forms import RegistrationFormUniqueEmail
 
 class RegistrationView(BaseRegistrationView):
+    form_class = RegistrationFormUniqueEmail #'email_username.forms.RegistrationForm'
+    success_url = None
+    template_name = 'registration/registration_form.html'
     #import pdb; pdb.set_trace()
     """
     A registration backend which follows a simple workflow:
