@@ -4,16 +4,21 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 admin.autodiscover()
 
+# per Django customizing auth model sample code:
+#admin.site.register(MyUser, MyUserAdmin)
+#admin.site.unregister(Group)
+
 urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'soccer.views.home', name='home'),
     # url(r'^soccer/', include('soccer.foo.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
-    # url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    #url(r'^accounts/', include('registration.urls')),
-    (r'^accounts/', include('registration.backends.default.urls')),
+    url(r'^accounts/', include('email_username.backends.urls')),
+    #(r'^accounts/', include('email_username.urls')),
+      #based on registration.backends.default.urls
 )

@@ -3,6 +3,10 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
+AUTH_USER_MODEL = 'email_username.EmailUser' #This dotted pair describes the name of the Django app 
+    #(which must be in your INSTALLED_APPS), and the name of the Django model that you wish to use as your User model.
+#AUTH_PROFILE_MODULE = ' email_username.RegistrationProfile' #not sure if this does anything
+
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
 )
@@ -30,8 +34,6 @@ else: # then assume running locally
             'PORT': '',                      # Set to empty string for default.
         }
     }
-
-# from registration_defaults.settings import * #per django-registration
 
 settingsDirectory = os.path.dirname(__file__)
 TEMPLATE_DIR = os.path.join(settingsDirectory,"templates")
@@ -143,6 +145,7 @@ INSTALLED_APPS = ( #order is signficant
     # 'django.contrib.admindocs',
     # for django-registration
     'django.contrib.humanize', # per django-registration
+    'email_username',
     'registration', #django-registration
     'djrill',
 )
@@ -182,6 +185,7 @@ SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # per django-registration
 ACCOUNT_ACTIVATION_DAYS=7
+REGISTRATION_OPEN=True # If false, user cannot register
 EMAIL_HOST='localhost'
 EMAIL_PORT=1023
 EMAIL_HOST_USER='username'
