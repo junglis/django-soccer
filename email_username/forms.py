@@ -10,7 +10,8 @@ you're using a custom model.
 """
 
 
-from django.contrib.auth.models import User
+#from django.contrib.auth.models import User
+from email_username.models import EmailUser as User
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 

@@ -1,5 +1,6 @@
 # ADAPTED FROM 1) DJANGO CUSTOM USER EXAMPLE AND 2) REGISTRATION MODELS.PY 
 # 1) DJANGO CUSTOM USER EXAMPLE
+from django.core.mail import send_mail #added by MW
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
@@ -70,6 +71,13 @@ class EmailUser(AbstractBaseUser):
         "Does the user have permissions to view the app `app_label`?"
         # Simplest possible answer: Yes, always
         return True
+
+    # email_user copied from /soccer/venv/lib/python2.7/site-packages/django/contrib/auth/models.py 
+    def email_user(self, subject, message, from_email=None):
+        """
+        Sends an email to this User.
+        """
+        send_mail(subject, message, from_email, [self.email])
 
     @property
     def is_staff(self):
@@ -172,10 +180,14 @@ class RegistrationManager(models.Manager):
         
         """
         salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
-        username = user.username
-        if isinstance(username, unicode):
-            username = username.encode('utf-8')
-        activation_key = hashlib.sha1(salt+username).hexdigest()
+        #username = user.username
+        email = user.email
+        #if isinstance(username, unicode):
+        #    username = username.encode('utf-8')
+        #activation_key = hashlib.sha1(salt+username).hexdigest()
+        if isinstance(email, unicode):
+           email = email.encode('utf-8')
+        activation_key = hashlib.sha1(salt+email).hexdigest()
         return self.create(user=user,
                            activation_key=activation_key)
         
