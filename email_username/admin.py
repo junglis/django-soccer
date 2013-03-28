@@ -1,3 +1,7 @@
+from django.contrib import admin
+from email_username.models import EmailUser
+admin.site.register(EmailUser)
+
 from django.db import models
 from django.contrib.auth.models import (
     BaseUserManager, AbstractBaseUser
