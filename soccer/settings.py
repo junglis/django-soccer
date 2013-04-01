@@ -3,7 +3,7 @@
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
-AUTH_USER_MODEL = 'email_auth.Captain' #This dotted pair describes the name of the Django app 
+AUTH_USER_MODEL = 'email_auth.User' #This dotted pair describes the name of the Django app 
     #(which must be in your INSTALLED_APPS), and the name of the Django model that you wish to use as your User model.
 #AUTH_PROFILE_MODULE = ' email_auth.RegistrationProfile' #not sure if this does anything
 

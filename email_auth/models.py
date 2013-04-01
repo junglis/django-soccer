@@ -15,7 +15,7 @@ try:
 except ImportError:
     datetime_now = datetime.datetime.now
 
-class CaptainManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
         """
         Creates and saves a User with the given email, password, first and last names.
@@ -24,7 +24,7 @@ class CaptainManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            email=CaptainManager.normalize_email(email),
+            email=UserManager.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
         )
@@ -46,7 +46,7 @@ class CaptainManager(BaseUserManager):
         return user
 
 
-class Captain(AbstractBaseUser):
+class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -67,7 +67,7 @@ class Captain(AbstractBaseUser):
                     'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
-    objects = CaptainManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
@@ -127,7 +127,7 @@ import re
 from django.conf import settings
 #from django.contrib.auth.models import User
 
-from email_auth.models import Captain as User
+from email_auth.models import User as User
 from django.db import models
 from django.db import transaction
 from django.template.loader import render_to_string

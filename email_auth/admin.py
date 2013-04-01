@@ -1,6 +1,6 @@
 from django.contrib import admin
-from email_auth.models import Captain
-admin.site.register(Captain)
+from email_auth.models import User
+admin.site.register(User)
 
 from django.db import models
 from django.contrib.auth.models import (
