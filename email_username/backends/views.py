@@ -13,6 +13,8 @@ from registration.views import RegistrationView as BaseRegistrationView
 
 from email_username.forms import RegistrationFormUniqueEmail
 
+from django.views.generic.base import TemplateView #added by me
+
 class RegistrationView(BaseRegistrationView):
     form_class = RegistrationFormUniqueEmail #'email_username.forms.RegistrationForm'
     success_url = None
@@ -80,12 +82,12 @@ class RegistrationView(BaseRegistrationView):
         class of this backend as the sender.
 
         """
-        email, password = cleaned_data['email'], cleaned_data['password1']
+        email, password, first_name, last_name = cleaned_data['email'], cleaned_data['password1'], cleaned_data['first_name'], cleaned_data['last_name']
         if Site._meta.installed:
             site = Site.objects.get_current()
         else:
             site = RequestSite(request)
-        new_user = RegistrationProfile.objects.create_inactive_user(email,
+        new_user = RegistrationProfile.objects.create_inactive_user(email, first_name, last_name,
                                                                     password, site)
         signals.user_registered.send(sender=self.__class__,
                                      user=new_user,
@@ -137,3 +139,14 @@ class ActivationView(BaseActivationView):
 
     def get_success_url(self, request, user):
         return ('registration_activation_complete', (), {})
+
+# import datetime
+# class ProfileView(TemplateView):
+#     template_name = 'email_username/user_profile.html'
+
+    # def get_context_data(self, **kwargs):
+    #     now = datetime.datetime.now()
+    #     context = {}
+    #     context['now'] = now
+    #     return context
+

@@ -35,11 +35,13 @@ class RegistrationForm(forms.Form):
     #                             max_length=30,
     #                             label=_("Username"),
     #                             error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
-    email = forms.EmailField(label=_("E-mail"))
+    first_name = forms.CharField(label=_("First Name"))
+    last_name = forms.CharField(label=_("Last Name"))
+    email = forms.EmailField(label=_("Email"))
     password1 = forms.CharField(widget=forms.PasswordInput,
                                 label=_("Password"))
     password2 = forms.CharField(widget=forms.PasswordInput,
-                                label=_("Password (again)"))
+                                label=_("Confirm Password"))
     
     def clean_username(self):
         """

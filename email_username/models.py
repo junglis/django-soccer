@@ -16,28 +16,30 @@ except ImportError:
     datetime_now = datetime.datetime.now
 
 class EmailUserManager(BaseUserManager):
-    def create_user(self, email, password=None):
+    def create_user(self, email, first_name, last_name, password=None):
         """
-        Creates and saves a User with the given email and password.
+        Creates and saves a User with the given email, password, first and last names.
         """
         if not email:
             raise ValueError('Users must have an email address')
 
         user = self.model(
             email=EmailUserManager.normalize_email(email),
+            first_name=first_name,
+            last_name=last_name,
         )
 
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, password):
+    def create_superuser(self, email, password, first_name, last_name):
         """
         Creates and saves a superuser with the given email, date of
         birth and password.
         """
         user = self.create_user(email,
-            password=password,
+            password=password,first_name=first_name,last_name=last_name
         )
         user.is_admin = True
         user.save(using=self._db)
@@ -68,7 +70,7 @@ class EmailUser(AbstractBaseUser):
     objects = EmailUserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = []
+    REQUIRED_FIELDS = ['first_name','last_name']
 
     def get_full_name(self):
         # The user is identified by their email address
@@ -76,7 +78,7 @@ class EmailUser(AbstractBaseUser):
 
     def get_short_name(self):
         # The user is identified by their email address
-        return self.email
+        return self.first_name
 
     def __unicode__(self):
         return self.email
@@ -186,7 +188,7 @@ class RegistrationManager(models.Manager):
                 return user
         return False
     
-    def create_inactive_user(self, email, password,
+    def create_inactive_user(self, email, password, first_name, last_name,
                              site, send_email=True):
         """
         Create a new, inactive ``User``, generate a
@@ -198,7 +200,7 @@ class RegistrationManager(models.Manager):
         
         """
         #new_user = User.objects.create_user(email, password)
-        new_user = User.objects.create_user(email, password)
+        new_user = User.objects.create_user(email, password, first_name, last_name)
         new_user.is_active = False
         new_user.save()
 
