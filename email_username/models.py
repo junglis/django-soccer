@@ -15,7 +15,7 @@ try:
 except ImportError:
     datetime_now = datetime.datetime.now
 
-class EmailUserManager(BaseUserManager):
+class CaptainManager(BaseUserManager):
     def create_user(self, email, first_name, last_name, password=None):
         """
         Creates and saves a User with the given email, password, first and last names.
@@ -24,7 +24,7 @@ class EmailUserManager(BaseUserManager):
             raise ValueError('Users must have an email address')
 
         user = self.model(
-            email=EmailUserManager.normalize_email(email),
+            email=CaptainManager.normalize_email(email),
             first_name=first_name,
             last_name=last_name,
         )
@@ -46,7 +46,7 @@ class EmailUserManager(BaseUserManager):
         return user
 
 
-class EmailUser(AbstractBaseUser):
+class Captain(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='email address',
         max_length=255,
@@ -67,21 +67,23 @@ class EmailUser(AbstractBaseUser):
                     'active. Unselect this instead of deleting accounts.'))
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
 
-    objects = EmailUserManager()
+    objects = CaptainManager()
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name','last_name']
 
     def get_full_name(self):
-        # The user is identified by their email address
-        return self.email
+        # The user is identified by their first and last name
+        full_name = self.first_name+' '+self.last_name
+        full_name.strip()
+        return full_name #after AbstractUser class
 
     def get_short_name(self):
-        # The user is identified by their email address
+        # The user is identified by their first name
         return self.first_name
 
     def __unicode__(self):
-        return self.email
+        return self.get_full_name()
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -114,16 +116,6 @@ class EmailUser(AbstractBaseUser):
     # def get_absolute_url(self):
     #     return "/users/%s/" % urlquote(self.username)
 
-    # def get_full_name(self):
-    #     """
-    #     Returns the first_name plus the last_name, with a space in between.
-    #     """
-    #     full_name = '%s %s' % (self.first_name, self.last_name)
-    #     return full_name.strip()
-
-    # def get_short_name(self):
-    #     "Returns the short name for the user."
-    #     return self.first_name
 ########## end of code copied from AbstractUser class #####
 
 #2) REGISTRATION MODELS.PY
@@ -135,7 +127,7 @@ import re
 from django.conf import settings
 #from django.contrib.auth.models import User
 
-from email_username.models import EmailUser as User
+from email_username.models import Captain as User
 from django.db import models
 from django.db import transaction
 from django.template.loader import render_to_string
@@ -393,3 +385,24 @@ class RegistrationProfile(models.Model):
                                    ctx_dict)
         
         self.user.email_user(subject, message, settings.DEFAULT_FROM_EMAIL)
+
+class Team(models.Model):
+    captain = models.OneToOneField(settings.AUTH_USER_MODEL, unique=True)
+    team_name = models.CharField(max_length=30, blank=True)
+
+    def __unicode__(self):
+        return self.team_name
+
+class Player(models.Model):
+    captain = models.ForeignKey(settings.AUTH_USER_MODEL)
+    first_name = models.CharField(max_length=30)
+    last_name = models.CharField(max_length=30)
+    email = models.CharField(max_length=30)
+
+    def get_full_name(self):
+        full_name = self.first_name+' '+self.last_name
+        full_name.strip()
+        return full_name
+
+    def __unicode__(self):
+        return self.get_full_name()

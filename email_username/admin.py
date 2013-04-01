@@ -1,6 +1,8 @@
 from django.contrib import admin
-from email_username.models import EmailUser
-admin.site.register(EmailUser)
+from email_username.models import Captain, Team, Player
+admin.site.register(Captain)
+admin.site.register(Team)
+admin.site.register(Player)
 
 from django.db import models
 from django.contrib.auth.models import (

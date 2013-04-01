@@ -1,7 +1,9 @@
-Thank you for kicking off the registration process at
+{{ user.full_name }},
+
+Thank you for providing your email address to
 {{ site.name }}.  
 
-Please continue the registration process by clicking on the following link within the next {{ expiration_days }} days:
+To register a team for the Ben Wieler Soccer Tournament, please click on the following link within {{ expiration_days }} days:
 
 http://{{site.domain}}{% url "registration_activate" activation_key %}
 
