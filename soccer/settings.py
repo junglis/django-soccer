@@ -148,6 +148,7 @@ INSTALLED_APPS = ( #order is signficant
     'email_auth',
     'registration', #django-registration
     'djrill',
+    'user_profile',
 )
 
 # A sample logging configuration. The only tangible logging
