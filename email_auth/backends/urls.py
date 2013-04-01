@@ -24,8 +24,8 @@ from django.views.generic.base import TemplateView
 
 #from registration.backends.default.views import ActivationView
 #from registration.backends.default.views import RegistrationView
-from email_username.backends.views import ActivationView
-from email_username.backends.views import RegistrationView
+from email_auth.backends.views import ActivationView
+from email_auth.backends.views import RegistrationView
 
 urlpatterns = patterns('',
                        url(r'^activate/complete/$',
@@ -49,5 +49,5 @@ urlpatterns = patterns('',
                            name='registration_disallowed'),
                        (r'', include('registration.auth_urls')),
                        url(r'^profile/$',
-                          TemplateView.as_view(template_name='email_username/user_profile.html'))
+                          TemplateView.as_view(template_name='email_auth/user_profile.html'))
                        )

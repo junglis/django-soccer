@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 
 from registration import signals
 #from registration.forms import RegistrationForm
-from email_username.forms import RegistrationForm
+from email_auth.forms import RegistrationForm
 
 class _RequestPassingFormView(FormView):
     """

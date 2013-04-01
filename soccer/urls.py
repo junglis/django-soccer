@@ -18,7 +18,7 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^accounts/', include('email_username.backends.urls')),
-    #(r'^accounts/', include('email_username.urls')),
+    url(r'^accounts/', include('email_auth.backends.urls')),
+    #(r'^accounts/', include('email_auth.urls')),
       #based on registration.backends.default.urls
 )

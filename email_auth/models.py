@@ -127,7 +127,7 @@ import re
 from django.conf import settings
 #from django.contrib.auth.models import User
 
-from email_username.models import Captain as User
+from email_auth.models import Captain as User
 from django.db import models
 from django.db import transaction
 from django.template.loader import render_to_string

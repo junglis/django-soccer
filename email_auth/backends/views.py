@@ -4,19 +4,19 @@ from django.contrib.sites.models import Site
 
 from registration import signals
 #from registration.models import RegistrationProfile
-from email_username.models import RegistrationProfile
+from email_auth.models import RegistrationProfile
 
 from registration.views import ActivationView as BaseActivationView
 from registration.views import RegistrationView as BaseRegistrationView
-#from email_username.registration_views import ActivationView as BaseActivationView
-#from email_username.registration_views import RegistrationView as BaseRegistrationView
+#from email_auth.registration_views import ActivationView as BaseActivationView
+#from email_auth.registration_views import RegistrationView as BaseRegistrationView
 
-from email_username.forms import RegistrationFormUniqueEmail
+from email_auth.forms import RegistrationFormUniqueEmail
 
 from django.views.generic.base import TemplateView #added by me
 
 class RegistrationView(BaseRegistrationView):
-    form_class = RegistrationFormUniqueEmail #'email_username.forms.RegistrationForm'
+    form_class = RegistrationFormUniqueEmail #'email_auth.forms.RegistrationForm'
     success_url = None
     template_name = 'registration/registration_form.html'
     #import pdb; pdb.set_trace()
@@ -142,7 +142,7 @@ class ActivationView(BaseActivationView):
 
 # import datetime
 # class ProfileView(TemplateView):
-#     template_name = 'email_username/user_profile.html'
+#     template_name = 'email_auth/user_profile.html'
 
     # def get_context_data(self, **kwargs):
     #     now = datetime.datetime.now()
