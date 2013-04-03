@@ -5,7 +5,6 @@ TEMPLATE_DEBUG = DEBUG
 
 AUTH_USER_MODEL = 'email_auth.User' #This dotted pair describes the name of the Django app 
     #(which must be in your INSTALLED_APPS), and the name of the Django model that you wish to use as your User model.
-#AUTH_PROFILE_MODULE = ' email_auth.RegistrationProfile' #not sure if this does anything
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -196,3 +195,6 @@ EMAIL_HOST_PASSWORD='password'
 MANDRILL_API_KEY = os.getenv("MANDRILL_API_KEY") # mandrill
 DEFAULT_FROM_EMAIL = os.getenv("DEFAULT_FROM_EMAIL") # added after looking at source code
 EMAIL_BACKEND = "djrill.mail.backends.djrill.DjrillBackend" # mandrill
+
+#per me
+PLAYERS_PER_TEAM = 5
