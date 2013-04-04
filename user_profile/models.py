@@ -9,6 +9,8 @@ class Team(models.Model):
     def __unicode__(self):
         return self.team_name
 
+    #objects = TeamManager()
+
 class Player(models.Model):
     User = models.ForeignKey(settings.AUTH_USER_MODEL)
     first_name = models.CharField(max_length=30)
@@ -22,3 +24,11 @@ class Player(models.Model):
 
     def __unicode__(self):
         return self.get_full_name()
+
+    #objects = PlayerManager()
+
+class TeamManager(models.Manager):
+    pass
+
+class PlayerManager():
+    pass

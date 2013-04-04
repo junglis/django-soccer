@@ -4,10 +4,10 @@
 <table>
     <form method='post' action=''>{% csrf_token %}
         {{ form }}
-        {% for key, value in players.items %}
+      <!--   {% for key, value in players.items %}
           {{ key }}: {{ value }}
-        {% endfor %}
-        <tr><td></td><td><input type="submit" value="Send activation email" /></td>
+        {% endfor %} -->
+        <tr><td></td><td><input type="submit" value="Create a Team" /></td>
     </form>
 </table>
 {% endblock %}

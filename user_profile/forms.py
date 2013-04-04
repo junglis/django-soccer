@@ -25,11 +25,34 @@ class ProfileForm(forms.Form):
     #                             label=_("Username"),
     #                             error_messages={'invalid': _("This value may contain only letters, numbers and @/./+/-/_ characters.")})
     team_name = forms.CharField(label=_("Team Name"))
-    players = {}
-    for i in range(1, settings.PLAYERS_PER_TEAM):
-        players["first_name"+str(i)] = forms.CharField(label=_("First Name"))
-        players["last_name"+str(i)] = forms.CharField(label=_("Last Name"))
-        players["email"+str(i)] = forms.EmailField(label=_("Email"))
+    
+    # clean this up
+    # p1_first = forms.CharField(label=_("P1 First Name"))
+    # p1_last = forms.CharField(label=_("P1 Last Name"))
+    # p1_email = forms.CharField(label=_("P1 Email"))
+
+    # p2_first = forms.CharField(label=_("P2 First Name"))
+    # p2_last = forms.CharField(label=_("P2 Last Name"))
+    # p2_email = forms.CharField(label=_("P2 Email"))
+
+    # p3_first = forms.CharField(label=_("P3 First Name"))
+    # p3_last = forms.CharField(label=_("P3 Last Name"))
+    # p3_email = forms.CharField(label=_("P3 Email"))
+
+    # p4_first = forms.CharField(label=_("P4 First Name"))
+    # p4_last = forms.CharField(label=_("P4 Last Name"))
+    # p4_email = forms.CharField(label=_("P4 Email"))
+
+    # p5_first = forms.CharField(label=_("P5 First Name"))
+    # p5_last = forms.CharField(label=_("P5 Last Name"))
+    # p5_email = forms.CharField(label=_("P5 Email"))
+ 
+    # it would be better to define a dictionary 
+    # players = {}
+    # for i in range(1, settings.PLAYERS_PER_TEAM):
+    #     players["first_name"+str(i)] = forms.CharField(label=_("First Name"))
+    #     players["last_name"+str(i)] = forms.CharField(label=_("Last Name"))
+    #     players["email"+str(i)] = forms.EmailField(label=_("Email"))
     
     def clean_username(self):
         """
